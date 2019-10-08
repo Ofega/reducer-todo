@@ -1,27 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Card from '../Atoms/Card';
-import { SectionTitle } from '../Atoms/Title';
+import TodosContext from '../../store/contexts/TodosContext';
 
 
-export const CardListGroup = ({ array, text }) => {
+export const CardListGroup = () => {
+
+    const todos = useContext(TodosContext);
+
     return (
         <StyledContainer>
-            <SectionTitle text={text} />
-            <ul>
-                {
-                    array.map(item => {
-                        return (
-                            <Card item={item} />
-                        )
-                    })
-                }
-            </ul>
+            {
+                todos.map(item => {
+                    return (
+                        <Card item={item} />
+                    )
+                })
+            }
         </StyledContainer>
     )
 }
 
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.ul`
 
 `

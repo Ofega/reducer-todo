@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import styled from 'styled-components';
 import { SiteTitle } from '../components/Atoms/Title';
-// import { CardListGroup } from '../components/Molecules/ListGroup';
+import { CardListGroup } from '../components/Molecules/ListGroup';
+import { initialTodos, todosReducer } from '../store/reducers/todos';
+import TodosContext from '../store/contexts/TodosContext';
 
 
 const Dashboard = () => {
+
+    const [todos, dispatch] = useReducer(todosReducer, initialTodos); 
+
     return (
         <StyledContainer>
-            <ListContainer>
+            <TodosContext.Provider value={todos}>
                 <SiteTitle text='Projects' />
-                {/* <CardListGroup text='Active Projects' />
-                <CardListGroup text='Other Ptojects' /> */}
-            </ListContainer>
-            <DescContainer>
-
-            </DescContainer>
+                <CardListGroup />
+            </TodosContext.Provider>
         </StyledContainer>
     )
 }
@@ -22,23 +23,15 @@ const Dashboard = () => {
 export default Dashboard;
 
 const StyledContainer = styled.div`
-    display: flex;
     height: 100%;
     width: 100%;
-` 
-
-const ListContainer= styled(StyledContainer)`
-    flex-direction: column;
-    max-width: 550px;
-    box-shadow: inset -10px 0px 20px 0px rgba(0,0,0,0.02);
     padding: ${props => props.theme.spaceMedium};
 
     ul {
-        border: 2px solid red;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: ${props => props.theme.spaceMedium}
         margin-top: ${props => props.theme.spaceLarge}
     }
-`
-
-const DescContainer = styled(StyledContainer)`
-    padding: ${props => props.theme.spaceMedium};
-`
+` 
