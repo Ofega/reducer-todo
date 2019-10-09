@@ -4,17 +4,20 @@ export const initialTodos = [
     {
         id: uuid(), 
         name: 'Bathe the Dog', 
-        isCompleted: false 
+        isCompleted: false,
+        tags: ['Education', 'Religion'] 
     },
     {
         id: uuid(), 
         name: 'Attend Lambda Lectures', 
-        isCompleted: false 
+        isCompleted: false,
+        tags: ['Spriritual'] 
     },
     {
         id: uuid(), 
         name: 'Work on Dev Diary', 
-        isCompleted: false 
+        isCompleted: false,
+        tags: ['Animal', 'Pet', 'Life']
     }
 ]
 
