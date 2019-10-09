@@ -1,23 +1,20 @@
 import React, { useState, useContext } from "react";
 import styled from 'styled-components';
-import uuid from 'uuid';
 import DashboardContext from "../../store/contexts/DashboardContext";
 
 
 
 const AddTodosModal = () => {
 
-    const { modalToggled, toggleModal} = useContext(DashboardContext);
+    const { modalToggled, toggleModal, addTodo} = useContext(DashboardContext);
 
     const initialTodo = {
-        id: uuid(), 
         name: '', 
-        isCompleted: false,
-        tags: [] 
+        tags: '' 
     }
 
     const [ newTodo, setNewTodo] = useState(initialTodo);
-    const { id, name, isCompleted, tags } = newTodo;
+    const { name, tags } = newTodo;
 
 
     // Handler Functions
@@ -31,8 +28,9 @@ const AddTodosModal = () => {
     const handleFormSubmit = (e) => {
         if(name) {
             e.preventDefault();
+            addTodo(newTodo)
             setNewTodo(initialTodo);
-            toggleModal(e);
+            toggleModal();
         }
     }
 
@@ -54,7 +52,7 @@ const AddTodosModal = () => {
 
                     <div className="form-inputs">
                         <label htmlFor="tags">Tags</label>
-                        <input type='text' id="tags" name='tags' onChange={handleInputChange} value={tags} placeholder='Todo Tags'/>
+                        <input type='text' id="tags" name='tags' onChange={handleInputChange} value={tags} placeholder='Add as many tags as you want with a comma separator'/>
                     </div>
 
                     <button type='submit' onClick={handleFormSubmit}>

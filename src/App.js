@@ -15,16 +15,25 @@ const App = () => {
   const { modalToggled, todos } = dashboard;
 
   const toggleModal = () => {
-    console.log('Toggled :)')
     dispatch({
       type: TOGGLE_MODAL
+    })
+  }
+
+  const addTodo = ({name, tags}) => {
+    dispatch({
+      type: TOGGLE_MODAL,
+      payload: {
+        name: name,
+        tags: tags.split(',')
+      }
     })
   }
 
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <DashboardContext.Provider value={{ modalToggled, todos, toggleModal}}>
+        <DashboardContext.Provider value={{ modalToggled, todos, toggleModal, addTodo }}>
           <GlobalStyles />
           <MainLayout />
         </DashboardContext.Provider>

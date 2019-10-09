@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { TOGGLE_MODAL } from '../types/dashboard'
+import { ADD_TODO, TOGGLE_MODAL } from '../types/dashboard'
 
 export const initialState = {
     modalToggled: false,
@@ -59,6 +59,21 @@ export const dashboardReducer = (state, action) => {
                 ...state,
                 modalToggled: !state.modalToggled
             }
+            case ADD_TODO:
+                return {
+                    ...state,
+                    todos: [ ...state.todos, {
+                        id: uuid(), 
+                        name: action.payload.name, 
+                        isCompleted: false,
+                        tags: action.payload.tags.map(item => {
+                            return {
+                                id: uuid(),
+                                text: item
+                            }
+                        })
+                    }]
+                }
         default:
             return state;
     }
