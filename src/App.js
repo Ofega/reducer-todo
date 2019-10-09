@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './styles/global.styles';
 import { theme } from './styles/theme.styles';
 import MainLayout from './components/Layout/MainLayout';
+import { dashboardReducer, initialState } from './store/reducers/dashboard';
+import { TOGGLE_MODAL } from './store/types/dashboard';
+import DashboardContext from './store/contexts/DashboardContext';
 
 
 const App = () => {
+
+  const [dashboard, dispatch] = useReducer(dashboardReducer, initialState); 
+  const { modalToggled, todos } = dashboard;
+
+  const toggleModal = () => {
+    console.log('Toggled :)')
+    dispatch({
+      type: TOGGLE_MODAL
+    })
+  }
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <MainLayout />
+        <DashboardContext.Provider value={{ modalToggled, todos, toggleModal}}>
+          <GlobalStyles />
+          <MainLayout />
+        </DashboardContext.Provider>
       </ThemeProvider>
     </BrowserRouter>
   );

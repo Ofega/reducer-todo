@@ -1,21 +1,18 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { SiteTitle } from '../components/Atoms/Title';
+import { Button } from '../components/Atoms/Button';
 import { TodosListGroup } from '../components/Molecules/TodosList';
-import { initialTodos, todosReducer } from '../store/reducers/todos';
-import TodosContext from '../store/contexts/TodosContext';
 
 
 const Dashboard = () => {
-
-    const [todos, dispatch] = useReducer(todosReducer, initialTodos); 
-
     return (
         <StyledContainer>
-            <TodosContext.Provider value={todos}>
-                <SiteTitle text='Projects' />
-                <TodosListGroup />
-            </TodosContext.Provider>
+            <div className="title-container">
+                <SiteTitle text='Todo List' />
+                <Button text='Add new' />
+            </div>
+            <TodosListGroup />
         </StyledContainer>
     )
 }
@@ -26,4 +23,10 @@ const StyledContainer = styled.div`
     height: 100%;
     width: 100%;
     padding: ${props => props.theme.spaceMedium};
+
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 ` 

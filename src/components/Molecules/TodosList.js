@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Card from '../Atoms/Card';
-import TodosContext from '../../store/contexts/TodosContext';
+import TodosContext from '../../store/contexts/DashboardContext';
 
 
 export const TodosListGroup = () => {
 
-    const todos = useContext(TodosContext);
+    const context = useContext(TodosContext);
 
     return (
         <TodosList>
             {
-                todos.map(todo => {
+                context.todos.map(todo => {
                     return (
                         <Card key={todo.id} todo={todo} />
                     )

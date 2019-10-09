@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SideNav from './SideNav';
 import AppRouter from './AppRouter';
+import AddTodosModal from '../Molecules/AddTodos';
 
 
 const MainLayout = () => {
@@ -9,6 +10,7 @@ const MainLayout = () => {
         <StyledContainer>
             <SideNav />
             <AppRouter />
+            <AddTodosModal />
         </StyledContainer>
     )
 }

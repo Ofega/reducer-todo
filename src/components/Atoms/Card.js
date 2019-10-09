@@ -1,5 +1,4 @@
 import React from 'react';
-import uuid from 'uuid';
 import styled from 'styled-components';
 import { SectionTitle } from './Title';
 // import { Icon } from 'semantic-ui-react';
@@ -8,10 +7,10 @@ import { SectionTitle } from './Title';
 const Card = ({ todo }) => {
     return (
         <StyledContainer>
-            <SectionTitle text="Attend Gabe's Redux class"/>
+            <SectionTitle text={todo.name} />
             <ul>
                 {
-                    todo.tags.map(item => <li key={uuid()}>{item}</li>)
+                    todo.tags.map(item => <li key={item.id}>{item.text}</li>)
                 }
             </ul>
         </StyledContainer>
@@ -36,7 +35,8 @@ const StyledContainer = styled.li`
         flex-wrap: wrap;
 
         li {
-            background: #ddd;
+            background: ${({ theme }) => theme.accentGrey};
+            font-weight: ${({ theme }) => theme.mediumWeight};
             font-size: ${({ theme }) => theme.bodyFontSizeXS};
             margin-right: ${({ theme }) => theme.spaceSmall};
             margin-bottom: ${({ theme }) => theme.spaceSmall};
